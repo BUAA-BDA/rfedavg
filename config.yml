@@ -1,0 +1,49 @@
+Output: './output.txt' # The file result is written. If you want to use stdout, just comment this line. 
+
+Dataset:
+  name: MNIST # Dataset name. MNIST EMNIST CIFAR10 Sent140 are supported
+  divide: niid # split function
+  type: Image # Image, NLP
+  s: 1.0 # similarity
+  # user: 500 # use when niid_device, iid_device
+
+Model: 
+  name: FedAvgCNN # model name. FedAvgCNN FedAvg2NN LogisticRegression LSTM are supported.
+  input_shape: [1, 28, 28]
+  cls_num: 10
+
+Trainer: 
+  name: FedAvg # trainer name. FedAvg FedProx qFedAvg rFedAvg rFedAvg2 rFedAvg-dp rFedAvg2-dp SCAFFOLD are supported
+  seed: 0
+  C: 1.0 # sample rate
+  E: 1 # local training epoch
+  Round: 300 # total communication round
+  n_clients: 10 # clients number
+  device: cpu # cpu/cuda
+  batch_size: 100
+  optimizer:
+    name: SGD # optimizer name
+    lr_decay: 1.0 # learning rate decay
+    params:
+      lr: 0.1
+      momentum: 0.0
+      weight_decay: 0.0
+      # centered: False
+      # alpha: 0.99
+      # eps: 1e-8
+  #####Trainer Parameters#####
+  # qfedavg
+  # L: 1.0
+  # q: 0.1
+
+  # rfedavg-dp/rfedavg2-dp
+  # lambda: 0.00001
+  # dp:
+  #   var: 200.0
+
+  # fedprox
+  # lambda: 0.5
+  
+  # SCAFFOLD
+  # eta_g: 1.0
+  #####Trainer Parameters#####
